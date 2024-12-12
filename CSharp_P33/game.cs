@@ -1,15 +1,27 @@
 ﻿using System.ComponentModel;
 
 namespace Game
-{
-    
+{    
+    enum CharacterRace
+    {
+        Human,
+        Ork,
+        Elf
+    }
+
     class Character
     {
-        string? name;
+        public string? name;
         int health;
         int damage;
         int defence;
+        CharacterRace race;
 
+        public CharacterRace Race 
+        { 
+            get { return race; } 
+            set { race = value; }
+        }
 
         public int Health
         {
@@ -17,19 +29,15 @@ namespace Game
             set { this.health = Math.Max(value, 0); }
         }
 
-        public Character(string name, int health, int damage, int defence) { 
+        public Character(string name, int health, int damage, int defence, CharacterRace race) { 
             this.name = name;
             this.health = health;
             this.damage = damage;
             this.defence = defence;
+            this.race = race;
         }
         
-        public Character() {
-            this.name = "Jonny";
-            this.health = 100;
-            this.damage = 5;
-            this.defence = 0;
-        }
+        public Character():this("Jonny", 100, 5, 0, CharacterRace.Human) { }
 
         public int GetHealth()
         {
@@ -46,6 +54,7 @@ namespace Game
             Console.WriteLine($" Здоров\'я: {this.health}");
             Console.WriteLine($" Шкода: {this.damage}");
             Console.WriteLine($" Захист: {this.defence}");
+            Console.WriteLine($" Раса: {this.race}");
         }
 
         public int TakeDamage( int damage )
