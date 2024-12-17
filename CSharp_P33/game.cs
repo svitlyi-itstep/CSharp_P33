@@ -39,15 +39,6 @@ namespace Game
         
         public Character():this("Jonny", 100, 5, 0, CharacterRace.Human) { }
 
-        public int GetHealth()
-        {
-            return this.health;
-        }
-        public void SetHealth(int health)
-        {
-            this.health = Math.Max(health, 0);
-        }
-
         public void Print()
         {
             Console.WriteLine($" -< {this.name} >-");
@@ -60,15 +51,14 @@ namespace Game
         public int TakeDamage( int damage )
         {
             this.health = Math.Max(this.health - damage, 0);
-            return this.health;
+            return damage;
         }
 
         public int Attack(Character target)
         {
             Random rnd = new Random(Convert.ToInt32(DateTimeOffset.Now.ToUnixTimeSeconds()));
             int final_damage = Math.Max(this.damage + rnd.Next(-3, 3), 0);
-            target.TakeDamage(final_damage);
-            return final_damage;
+            return target.TakeDamage(final_damage);
         }
         
         public bool IsAlive()
